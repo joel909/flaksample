@@ -23,7 +23,8 @@ async def Search(query):
     videosResult =  await videosSearch.next()
     print(videosResult["result"])
     title = videosResult["result"][0]["accessibility"]["title"]
-    preview = "https://www.youtube.com/watch?v=7tNtU5XFwrU"
+    video_id = videosResult["result"][0]["id"]
+    preview = f"https://www.youtube.com/embed/{video_id}"
     #print(video_search_results["result"])
     return {"title":title,"preview":preview}
 
