@@ -19,14 +19,22 @@ def about():
 
 @app.route('/search/<query>')
 async def Search(query):
-    videosSearch = VideosSearch(query, limit = 2)
+    videosSearch = VideosSearch(query, limit = 20)
     videosResult =  await videosSearch.next()
-    print(videosResult["result"])
-    title = videosResult["result"][0]["accessibility"]["title"]
-    video_id = videosResult["result"][0]["id"]
-    preview = f"https://www.youtube.com/embed/{video_id}"
+    #print(videosResult["result"])
+    complete_data = []
+    print(len(videosResult["result"]))
+    for i in range(0,len(videosResult["result"])):
+        title = videosResult["result"][i]["accessibility"]["title"]
+        video_id = videosResult["result"][i]["id"]
+        preview = f"https://www.youtube.com/embed/{video_id}"
+        data = {"title":title,"preview":preview}
+        complete_data.append(data)
+
+    
+    
     #print(video_search_results["result"])
-    return {"title":title,"preview":preview}
+    return {"data":complete_data}
 
 if __name__ == "__main__":
     app.run(port=8000,debug=True)   
