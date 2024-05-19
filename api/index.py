@@ -34,7 +34,7 @@ async def Search(query):
     
     
     #print(video_search_results["result"])
-    return {"data":complete_data}
+    return {"data":complete_data,"total_results":len(videosResult["result"])}
 
 if __name__ == "__main__":
     app.run(port=8000,debug=True)   
